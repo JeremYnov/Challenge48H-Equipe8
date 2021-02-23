@@ -1,0 +1,8 @@
+.container-d-flex{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container-d-flex .card{
+    margin: 15px;
+}

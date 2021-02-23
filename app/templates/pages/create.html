@@ -1,0 +1,171 @@
+{% extends "base.html" %} {% block title %}Créer{% endblock %} {% block link
+%}{% endblock %} {% block body %}
+
+<div id="upload" class="row">
+  <div class="col s10 offset-s1">
+    <h2>Ajouter</h2>
+
+    <form
+      enctype="multipart/form-data"
+      id="myform"
+      action="/create"
+      method="POST"
+    >
+      <div class="row">
+        <div class="input-field">
+          <div>Image :</div>
+          <input
+            type="file"
+            id="picture"
+            name="picture"
+            accept="image/png, image/jpeg"
+            required
+          />
+        </div>
+        <div class="input-field col s5">
+          <input
+            placeholder="Nom de l'image"
+            id="picture_name"
+            name="picture_name"
+            type="text"
+            class="validate"
+            required
+          />
+          <label for="picture_name">Nom de l'image</label>
+        </div>
+
+        <div class="input-field col s5">
+          <input
+            placeholder="Type d'image"
+            id="picture_type"
+            name="picture_type"
+            type="text"
+            class="validate"
+            required
+          />
+          <label for="picture_type">Type de l'image</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s2">
+          <label>
+            <input
+              type="checkbox"
+              name="with_product"
+              id="with_product"
+              name="with_product"
+            />
+            <span>Avec produit:</span>
+          </label>
+        </div>
+
+        <div class="col s2">
+          <label>
+            <input type="checkbox" id="with_human" name="with_human" />
+            <span>Avec humain:</span>
+          </label>
+        </div>
+
+        <div class="col s2">
+          <label>
+            <input type="checkbox" id="is_instit" name="is_instit" />
+            <span>Photo institutionnelle:</span>
+          </label>
+        </div>
+
+        <div class="col s2">
+          <label>
+            <input type="checkbox" id="is_vertical" name="is_vertical" />
+            <span>Format vertical:</span>
+          </label>
+        </div>
+
+        <div class="col s2">
+          <label>
+            <input type="checkbox" id="is_limited" name="is_limited" />
+            <span>Droit utilisation limitée:</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s5">
+          <input
+            placeholder="Crédit de la photo"
+            name="picture_author"
+            id="picture_author"
+            type="text"
+            class="validate"
+          />
+          <label for="picture_author">Crédit de l'image:</label>
+        </div>
+
+        <div class="input-field col s5">
+          <input
+            placeholder="Copyrigth"
+            name="picture_copyright"
+            id="picture_copyright"
+            type="text"
+            class="validate"
+          />
+          <label for="picture_copyright">Copyright:</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s10">
+          <input
+            placeholder="Date de la photo"
+            id="picture_date"
+            name="picture_date"
+            type="date"
+            class="validate"
+          />
+          <label for="picture_date">Date de l'image:</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s10">
+          <div id="parenttag" name="parenttag">
+            <div class="input-field col s5" id="tagholder">
+              <input
+                placeholder="Nom du tag"
+                id="tag0"
+                name="tag0"
+                type="text"
+                class="validate"
+                required
+              />
+              <label for="picture_name">Nom du tag</label>
+            </div>
+          </div>
+          <div class="btn waves-effect waves-light" onclick="newTag()">
+            Mettre un tag supplémentaire
+          </div>
+        </div>
+      </div>
+
+      <button class="btn waves-effect waves-light" type="submit">
+        <i class="material-icons right">Enregistrer</i>
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock body %} {% block js %}
+<script>
+  var i = 0;
+  function newTag() {
+    i++;
+    var iterator = i.toString();
+    var div_start =
+      '<div class="input-field col s5" id="tagholder"><input placeholder="Nom du tag" id="tag';
+    var div_middle = '" name="tag';
+    var div_end =
+      '" type="text" class="validate" required /><label for="picture_name">Nom du tag</label></div>';
+    var final_div = div_start + iterator + div_middle + iterator + div_end;
+    $("#parenttag").append(final_div);
+  }
+</script>
+{% endblock %}

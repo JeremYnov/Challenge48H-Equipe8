@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}Rechercher{% endblock %}
+
+{% block link %}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="input-field col s3">
+            <input placeholder="Nom recherché" id="searched_name" type="text" class="validate">
+            <label for="searched_name">Nom recherché</label>
+        </div>
+        
+        <div class="input-field col s3">
+            <input placeholder="Type recherché" id="searched_type" type="text" class="validate">
+            <label for="searched_type">Type recherché</label>
+        </div>
+
+        <div class="input-field col s3">
+            <input placeholder="Autheur recherché" id="credits_name" type="text" class="validate">
+            <label for="credits_name">Autheur recherché</label>
+        </div>
+    
+        <div class="input-field col s3">
+            <input placeholder="Tag recherché" id="searched_tag" type="text" class="validate">
+            <label for="searched_tag">Tag recherché</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s3">
+            <label>
+              <input type="checkbox" id="with_product" />
+              <span>Image avec produit</span>
+            </label>
+        </div>
+
+        <div class="col s3">
+            <label>
+              <input type="checkbox" id="with_human"/>
+              <span>Image avec des humains</span>
+            </label>
+        </div>
+
+        <div class="col s3">
+            <label>
+              <input type="checkbox" id="institutional"/>
+              <span>Image institutionnelle</span>
+            </label>
+        </div>
+
+        <div class="col s3">
+            <label>
+              <input type="checkbox" id="is_vertical" name="is_vertical"/>
+              <span>Format vertical (horizontal par défaut)</span>
+            </label>
+        </div>
+    </div>
+    <button class="btn waves-effect waves-light" onclik="data.search()">
+        <i class="material-icons right">Rechercher</i>
+    </button>
+</div>
+
+{% endblock body %}
+
+{% block js %}
+<script>
+    var data = {};
+
+    data.search = function (){
+
+        var posted_data = {
+            "filters" : [
+                "name" = $('#searched_name').val(),
+                "type" = $('#searched_type').val(),
+                "credits" = $('#credits_name').val(),
+                "tags" = [ $('#credits_name').val() ],
+                "with_product" = $('#with_product').is(":checked") ? 1 : 0,
+                "with_human" = $('#with_human').is(":checked") ? 1 : 0,
+                "institutional" = $('#institutional').is(":checked") ? 1 : 0,
+                "is_vertical" = $('#is_vertical').is(":checked") ? 1 : 0
+            ]
+        };
+
+        var url = window.location;
+        var base_url = url.protocol + "/" + url.host + "/";
+        //console.log(d);
+            $.ajax({
+                    type: 'POST',
+                    dataType: 'application/json',
+                    url: base_url + '/search',
+                    data: posted_data,
+                    success: function( result ) {
+                        console.log(result);
+                    },
+                    error: function( result ) { 
+                        console.log(result);
+                    }
+            });
+    };
+
+</script>
+{% endblock %}
