@@ -1,16 +1,65 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block link %}
-<link
+<!-- <link
   rel="stylesheet"
   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
   integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
   crossorigin="anonymous"
-/>
-<link rel="stylesheet" href="../static/css/style.css">
+/> -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<link rel="stylesheet" href="../static/css/style.css" />
 {% endblock %} {% block body %}
-<a href="{{ url_for('create') }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Ajouter</a>
-<div class="container-d-flex container">
-  {%for image in images%}
-  <div class="card" style="width: 18rem">
+<a
+  href="{{ url_for('create') }}"
+  class="btn btn-primary btn-lg active"
+  role="button"
+  aria-pressed="true"
+  >Ajouter</a
+>
+<div class="row">
+  <div
+    class="col s6"
+    style="width: 100%; display: flex; flex-wrap: wrap; justify-content: center"
+  >
+    {%for image in images%}
+
+    <div class="card" style="width: 20%; margin: 20px">
+      <div class="card-image">
+        <img src="../static/{{image.path}}" />
+        <span class="card-title">{{image.name}}</span>
+        <a class="btn-floating halfway-fab waves-effect waves-light red" href="/update/{{image.path}}"><i class="material-icons">edit</i></a>
+      </div>
+      <div class="card-content">
+        <p>Type : {{image.type}}</p>
+        {%if image.with_product == True%}
+        <p>Avec produit : Oui</p>
+        {%else%}
+        <p>Avec produit : Non</p>
+        {%endif%}
+
+        {%if image.with_human == True%}
+        <p>Avec humain : Oui</p>
+        {%else%}
+        <p>Avec humain : Non</p>
+        {%endif%}
+
+        {%if image.institutional == True%}
+        <p>Photo institutionelle : Oui</p>
+        {%else%}
+        <p>Photo institutionelle : Non</p>
+        {%endif%}
+        {%if image.tags%}
+        <h5>Tags</h5>
+        {%for tag in image.tags%}
+        <div class="tag">{{tag}}</div>
+        {%endfor%}
+        {%else%}
+        <h5>Tags</h5>
+        <div class="no-tag">Pas de tag</div>
+        {%endif%}
+      </div>
+    </div>
+    <!-- <div class="card" style="width: 18rem">
     <img
       class="card-img-top"
       src="../static/{{image.path}}"
@@ -18,16 +67,18 @@
       style="width: 100%"
     />
     <div class="card-body">
-      <h5 class="card-title">{{image.name}}</h5>
+      <h5 class="card-title">Name : {{image.name}}</h5>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">{{image.type}}</li>
+      <li class="list-group-item">Type : {{image.type}}</li>
     </ul>
+  </div> -->
+    {%endfor%}
   </div>
-  {%endfor%}
 </div>
 {% endblock body %} {% block js %}
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
 {% endblock %}

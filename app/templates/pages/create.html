@@ -138,7 +138,7 @@
                 class="validate"
                 required
               />
-              <label for="picture_name">Nom du tag</label>
+              <!-- <label for="picture_name">Nom du tag</label> -->
             </div>
           </div>
           <div class="btn waves-effect waves-light" onclick="newTag()">
@@ -154,6 +154,7 @@
   </div>
 </div>
 {% endblock body %} {% block js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
   var i = 0;
   function newTag() {
@@ -163,7 +164,7 @@
       '<div class="input-field col s5" id="tagholder"><input placeholder="Nom du tag" id="tag';
     var div_middle = '" name="tag';
     var div_end =
-      '" type="text" class="validate" required /><label for="picture_name">Nom du tag</label></div>';
+      '" type="text" class="validate" required /></div>';
     var final_div = div_start + iterator + div_middle + iterator + div_end;
     $("#parenttag").append(final_div);
   }

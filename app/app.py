@@ -8,7 +8,7 @@ import ast
 from config import DevelopmentConfig
 from werkzeug.utils import secure_filename
 
-UPLOAD_FOLDER = 'pic/'
+UPLOAD_FOLDER = 'static/'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
@@ -57,6 +57,7 @@ def create():
         current_dir = os.getcwd()
         path = current_dir + "\\static\\"
         imgPath = path + secure_filename(picture.filename)
+        
         picture.save(imgPath)
         pictureName = req.get("picture_name")
         pictureType = req.get("picture_type")
